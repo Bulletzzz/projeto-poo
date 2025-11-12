@@ -82,6 +82,6 @@
 
 ## FUNÇÕES DOS INTEGRANTES
 
-- Bernardo Küster Ragugnetti: 
-- Pedro Henrique Moreira: 
-- Guilherme Dos Anjos Barbosa: 
+- Bernardo Küster Ragugnetti: Modelagem, SOLID e Imutabilidade
+- Pedro Henrique Moreira: Cadastros, Repositórios e lógica
+- Guilherme Dos Anjos Barbosa: Menu, Responsividade e Filas
