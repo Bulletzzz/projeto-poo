@@ -1,7 +1,7 @@
 =
-       README - SISTEMA DE GESTÃO DE PEDIDOS
-       PROJETO FINAL - PROGRAMAÇÃO ORIENTADA A OBJETOS
-       ALUNOS: Bernardo Küster Ragugnetti, Pedro Henrique Moreira e Guilherme Dos Anjos Barbosa
+       - README - SISTEMA DE GESTÃO DE PEDIDOS
+       - PROJETO FINAL - PROGRAMAÇÃO ORIENTADA A OBJETOS
+       - ALUNOS: Bernardo Küster Ragugnetti, Pedro Henrique Moreira e Guilherme Dos Anjos Barbosa
 =
 
 --------------------------------------------------------------------------------
