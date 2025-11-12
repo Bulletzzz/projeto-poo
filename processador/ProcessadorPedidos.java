@@ -21,7 +21,6 @@ public class ProcessadorPedidos extends Thread {
                 synchronized (pedido) {
                     pedido.setStatus(StatusPedido.PROCESSANDO);
                 }
-                // Simula processamento
                 Thread.sleep(3000 + (long)(Math.random() * 2000));
                 synchronized (pedido) {
                     pedido.setStatus(StatusPedido.FINALIZADO);
@@ -37,4 +36,5 @@ public class ProcessadorPedidos extends Thread {
         rodando = false;
         interrupt();
     }
+
 }
