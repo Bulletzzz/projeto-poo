@@ -33,3 +33,4 @@ public class ProcessadorPedidos extends Thread {
         rodando = false;
         interrupt();
     }
+}
