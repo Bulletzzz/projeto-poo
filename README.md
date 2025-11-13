@@ -9,7 +9,7 @@
    - Clique com o botão direito → "Abrir no Terminal" ou digite "cmd" na barra de endereços.
 
 2. Compile todos os arquivos Java:
-   - javac -d out Main.java model\*.java enums\*.java exceptions\*.java repositorio\*.java repositorio\impl\*.java servico\*.java fila\*.java processador\*.java ui\*.java
+   javac -d out Main.java model/*.java enums/*.java exceptions/*.java repositorio/*.java repositorio/impl/*.java servico/*.java fila/*.java processador/*.java ui/*.java
 
 3. Execute o programa:
    - java -cp out Main
