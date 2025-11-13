@@ -1,0 +1,10 @@
+
+out/
+
+clientes.csv
+produtos.csv
+pedidos.csv
+
+.idea/
+*.iml
+.vscode/
