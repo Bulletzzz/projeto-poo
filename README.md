@@ -76,7 +76,6 @@
 - Geração de IDs thread-safe: AtomicLong no repositório
 - Enums: StatusPedido e CategoriaProduto
 - Persistência: Em memória (HashMap + List)
-- Bônus (arquivo JSON/CSV): Não implementado (opcional)
 
 ---
 
