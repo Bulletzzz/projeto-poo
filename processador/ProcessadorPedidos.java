@@ -17,23 +17,19 @@ public class ProcessadorPedidos extends Thread {
     public void run() {
         while (rodando) {
             try {
-                Pedido pedido = fila.dequeue();
-                synchronized (pedido) {
-                    pedido.setStatus(StatusPedido.PROCESSANDO);
-                }
-                // Simula processamento
-                Thread.sleep(3000 + (long)(Math.random() * 2000));
-                synchronized (pedido) {
-                    pedido.setStatus(StatusPedido.FINALIZADO);
-                }
+                Pedido pedido = fila.remover();
+                pedido.atualizarStatus(StatusPedido.PROCESSANDO);
+                System.out.println("Processando pedido ID: " + pedido.obterId());
+                Thread.sleep((int) (Math.random() * 2000 + 3000)); 
+                pedido.atualizarStatus(StatusPedido.FINALIZADO);
+                System.out.println("Pedido ID: " + pedido.obterId() + " finalizado.");
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
-                break;
             }
         }
     }
 
-    public void encerrar() {
+    public void parar() {
         rodando = false;
         interrupt();
     }

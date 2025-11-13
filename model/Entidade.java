@@ -1,26 +1,16 @@
 package model;
 
 public abstract class Entidade {
-    protected final long id;
+    protected final int id;
 
-    protected Entidade(long id) {
+    protected Entidade(int id) {
         this.id = id;
     }
 
-    public long getId() {
+    public int obterId() {
         return id;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Entidade)) return false;
-        Entidade entidade = (Entidade) o;
-        return id == entidade.id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Long.hashCode(id);
-    }
+    public abstract String toCSV();
+    public abstract void fromCSV(String linha);
 }

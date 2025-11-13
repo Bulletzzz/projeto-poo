@@ -1,41 +1,82 @@
 package model;
 
 import enums.StatusPedido;
-
+import exceptions.ValidacaoException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public final class Pedido extends Entidade {
+public class Pedido extends Entidade {
     private final Cliente cliente;
-    private final List<ItemPedido> itens;
-    private StatusPedido status;
+    private final List<ItemPedido> itens = new ArrayList<>();
+    private StatusPedido status = StatusPedido.ABERTO;
 
-    private Pedido(long id, Cliente cliente, List<ItemPedido> itens) {
+    private Pedido(int id, Cliente cliente) {
         super(id);
         this.cliente = cliente;
-        this.itens = new ArrayList<>(itens);
-        this.status = StatusPedido.ABERTO;
     }
 
-    public static Pedido criar(long id, Cliente cliente, List<ItemPedido> itens) {
-        if (itens.isEmpty()) throw new IllegalArgumentException("Pedido deve ter pelo menos um item.");
-        return new Pedido(id, cliente, itens);
+    public static Pedido criar(int id, Cliente cliente) throws ValidacaoException {
+        if (cliente == null) {
+            throw new ValidacaoException("Cliente é obrigatório.");
+        }
+        return new Pedido(id, cliente);
     }
 
-    public Cliente getCliente() { return cliente; }
-    public List<ItemPedido> getItens() { return Collections.unmodifiableList(itens); }
-    public StatusPedido getStatus() { return status; }
-    public double getValorTotal() {
-        return itens.stream().mapToDouble(ItemPedido::getSubtotal).sum();
+    public void adicionarItem(ItemPedido item) {
+        itens.add(item);
     }
 
-    public synchronized void setStatus(StatusPedido status) {
-        this.status = status;
+    public void validarItens() throws ValidacaoException {
+        if (itens.isEmpty()) {
+            throw new ValidacaoException("Pedido deve conter pelo menos um item.");
+        }
     }
 
-    public synchronized void paraFila() {
-        if (status != StatusPedido.ABERTO) throw new IllegalStateException("Só pode ir para fila se estiver ABERTO");
-        this.status = StatusPedido.FILA;
+    public double calcularValorTotal() {
+        double total = 0;
+        for (ItemPedido item : itens) {
+            total += item.calcularValor();
+        }
+        return total;
+    }
+
+    public synchronized void atualizarStatus(StatusPedido novoStatus) {
+        this.status = novoStatus;
+    }
+
+    public synchronized StatusPedido obterStatus() {
+        return status;
+    }
+
+    public Cliente obterCliente() {
+        return cliente;
+    }
+
+    public List<ItemPedido> obterItens() {
+        return new ArrayList<>(itens);
+    }
+
+    public void exibirInformacoes() {
+        System.out.println("ID: " + id + ", Cliente: " + cliente.obterNome() + ", Status: " + status);
+        System.out.println("Itens:");
+        for (ItemPedido item : itens) {
+            item.exibirInformacoes();
+        }
+        System.out.println("Total: " + calcularValorTotal());
+    }
+
+    @Override
+    public String toCSV() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(id).append(",").append(cliente.obterId()).append(",").append(status.name());
+        for (ItemPedido item : itens) {
+            sb.append(",").append(item.toCSV());
+        }
+        return sb.toString();
+    }
+
+    @Override
+    public void fromCSV(String linha) {
+        
     }
 }

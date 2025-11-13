@@ -1,10 +1,14 @@
 package repositorio;
 
+import exceptions.ValidacaoException;
+import java.io.IOException;
 import java.util.List;
 
 public interface Repositorio<T> {
     void adicionar(T entidade);
-    T buscarPorId(long id);
+    T encontrarPorId(int id);
     List<T> listarTodos();
-    long proximoId();
+    int obterProximoId();
+    void salvarEmArquivo(String arquivo) throws IOException;
+    void carregarDeArquivo(String arquivo) throws IOException, ValidacaoException;
 }

@@ -1,26 +1,21 @@
 package fila;
 
-import model.Pedido;
-
 import java.util.LinkedList;
 import java.util.Queue;
+import model.Pedido;
 
 public class FilaPedidos {
     private final Queue<Pedido> fila = new LinkedList<>();
 
-    public synchronized void enqueue(Pedido pedido) {
+    public synchronized void adicionar(Pedido pedido) {
         fila.add(pedido);
         notifyAll();
     }
 
-    public synchronized Pedido dequeue() throws InterruptedException {
+    public synchronized Pedido remover() throws InterruptedException {
         while (fila.isEmpty()) {
             wait();
         }
         return fila.poll();
-    }
-
-    public synchronized boolean isEmpty() {
-        return fila.isEmpty();
     }
 }
